@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        h1, h2 { margin: 0 0 20px 0; }
+        
+        /* Stats Cards */
+        .stats { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+        .stat-value { font-size: 32px; font-weight: 600; margin: 10px 0; }
+        .present { color: #4CAF50; }
+        .absent { color: #f44336; }
+        .total { color: #2196F3; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { font-weight: 600; background: rgba(0,0,0,0.2); }
+        .status-present { color: #4CAF50; }
+        .status-absent { color: #f44336; }
+        
+        /* QR Code Modal */
+        .modal { 
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 90%;
+        }
+        .modal-qr {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .close-btn {
+            background: #4CAF50;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .view-qr {
+            color: #2196F3;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-chalkboard-teacher"></i> Teacher Dashboard</h1>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Present Today</h3>
+                <div class="stat-value present">7</div>
+                <p>students</p>
+            </div>
+            <div class="stat-card">
+                <h3>Absent Today</h3>
+                <div class="stat-value absent">3</div>
+                <p>students</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Students</h3>
+                <div class="stat-value total">10</div>
+                <p>in class</p>
+            </div>
+        </div>
+        
+        <h2><i class="fas fa-calendar-day"></i> Today's Attendance</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>STU101</td>
+                    <td>Shrawani Wankhede</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU102</td>
+                    <td>Neha Yadav</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU103</td>
+                    <td>Vruti Lad</td>
+                    <td>2025-03-26</td>
+                    <td class="status-absent">Absent</td>
+                </tr>
+                <tr>
+                    <td>STU104</td>
+                    <td>Vinita Shrimali</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU105</td>
+                    <td>Ayush Yadav</td>
+                    <td>2025-03-26</td>
+                    <td class="status-absent">Absent</td>
+                </tr>
+                <tr>
+                    <td>STU106</td>
+                    <td>Pallavi Omprakash</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU107</td>
+                    <td>Pratik Mishra</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU108</td>
+                    <td>Rohan Guleria</td>
+                    <td>2025-03-26</td>
+                    <td class="status-absent">Absent</td>
+                </tr>
+                <tr>
+                    <td>STU109</td>
+                    <td>Priyadarshan Bhaskar Bodade</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+                <tr>
+                    <td>STU110</td>
+                    <td>Harsh Prakash Mangela</td>
+                    <td>2025-03-26</td>
+                    <td class="status-present">Present</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2><i class="fas fa-qrcode"></i> Student QR Codes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>QR Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>STU101</td>
+                    <td>Shrawani Wankhede</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU101', 'Shrawani Wankhede')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU102</td>
+                    <td>Neha Yadav</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU102', 'Neha Yadav')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU103</td>
+                    <td>Vruti Lad</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU103', 'Vruti Lad')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU104</td>
+                    <td>Vinita Shrimali</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU104', 'Vinita Shrimali')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU105</td>
+                    <td>Ayush Yadav</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU105', 'Ayush Yadav')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU106</td>
+                    <td>Pallavi Omprakash</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU106', 'Pallavi Omprakash')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU107</td>
+                    <td>Pratik Mishra</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU107', 'Pratik Mishra')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU108</td>
+                    <td>Rohan Guleria</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU108', 'Rohan Guleria')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU109</td>
+                    <td>Priyadarshan Bhaskar Bodade</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU109', 'Priyadarshan Bhaskar Bodade')">View QR</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>STU110</td>
+                    <td>Harsh Prakash Mangela</td>
+                    <td>
+                        <span class="view-qr" onclick="showQR('STU110', 'Harsh Prakash Mangela')">View QR</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Student QR Code</h2>
+            <p id="studentInfo"></p>
+            <img class="modal-qr" id="qrCodeImage" src="" alt="QR Code">
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // QR code modal display functionality
+        function showQR(studentId, studentName) {
+            document.getElementById('modalTitle').textContent = studentName + "'s QR Code";
+            document.getElementById('studentInfo').textContent = "Student ID: " + studentId;
+            document.getElementById('qrCodeImage').src = "qrcodes/" + studentId + ".png";
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('qrModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
